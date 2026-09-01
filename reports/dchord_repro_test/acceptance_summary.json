@@ -1,0 +1,107 @@
+{
+  "version": "p1h_acceptance_component_128_v1",
+  "comparison_scope": "same frozen 128 CelebA samples; same GPU; serial; batch 1",
+  "dflash_b16": {
+    "records": 8,
+    "exact_40_bool_records": 8,
+    "mean_rounds": 40.0,
+    "mean_proposed_units_per_round": 15.0,
+    "mean_accepted_units_per_round": 7.4,
+    "draft_accept_rate": 0.49333333333333335,
+    "mean_complete_output_tokens_advanced_per_round": 8.375,
+    "mean_bonus_or_correction_units_per_round": 0.975,
+    "label_accuracy": 0.71875,
+    "component_diagnostics": {
+      "mean_decode_ms_raw_safe_adapter": 11144.784863572568,
+      "mean_target_verify_ms": 5522.45474094525,
+      "mean_draft_ms": 322.2335362806916,
+      "mean_snapshot_ms": 19.315545447170734,
+      "mean_restore_ms": 18.288965336978436,
+      "mean_nonverify_target_advance_ms": 5223.837058059871,
+      "target_verify_ms_per_round": 138.06136852363124,
+      "draft_ms_per_round": 8.05583840701729,
+      "verify_plus_draft_ms_per_round": 146.11720693064854,
+      "note": "nonverify_target_advance includes accepted-prefix replay and/or separate bonus/state-commit forwards; it is an optimization target, not all removable work"
+    }
+  },
+  "dchord_k3": {
+    "records": 8,
+    "exact_40_bool_records": 8,
+    "mean_rounds": 10.0,
+    "mean_proposed_units_per_round": 3.0,
+    "mean_accepted_units_per_round": 3.0,
+    "draft_accept_rate": 1.0,
+    "mean_complete_output_tokens_advanced_per_round": 33.4,
+    "mean_bonus_or_correction_units_per_round": 1.0,
+    "label_accuracy": 0.71875,
+    "component_diagnostics": {
+      "mean_decode_ms_raw_safe_adapter": 2846.153604798019,
+      "mean_target_verify_ms": 1379.2750518769026,
+      "mean_draft_ms": 78.99737916886806,
+      "mean_snapshot_ms": 4.795189946889877,
+      "mean_restore_ms": 0.0,
+      "mean_nonverify_target_advance_ms": 1369.6204028092325,
+      "target_verify_ms_per_round": 137.92750518769026,
+      "draft_ms_per_round": 7.8997379168868065,
+      "verify_plus_draft_ms_per_round": 145.82724310457706,
+      "note": "nonverify_target_advance includes accepted-prefix replay and/or separate bonus/state-commit forwards; it is an optimization target, not all removable work"
+    }
+  },
+  "dchord_over_dflash_complete_output_advance_per_verify_round": 3.988059701492537,
+  "paired_bootstrap_10000": {
+    "dflash_accepted_per_round": {
+      "low_95": 7.4,
+      "high_95": 7.4
+    },
+    "dchord_accepted_per_round": {
+      "low_95": 3.0,
+      "high_95": 3.0
+    },
+    "complete_output_advance_ratio_dchord_over_dflash": {
+      "low_95": 3.988059701492537,
+      "high_95": 3.9880597014925367
+    },
+    "verify_plus_draft_cost_ratio_dchord_over_dflash": {
+      "low_95": 0.994417423779091,
+      "high_95": 1.0013074198431433
+    },
+    "raw_safe_adapter_speed_ratio_dchord_over_dflash": {
+      "low_95": 3.898867929786153,
+      "high_95": 3.933763498767419
+    }
+  },
+  "dflash_first_rejection_surface": {
+    "rejection_events": 304,
+    "full_accept_rounds": 16,
+    "first_rejection_surface_counts": {
+      "value": 48,
+      "key": 248,
+      "separator_or_format": 0,
+      "terminal": 8
+    },
+    "first_rejection_surface_rates": {
+      "value": 0.15789473684210525,
+      "key": 0.8157894736842105,
+      "separator_or_format": 0.0,
+      "terminal": 0.02631578947368421
+    },
+    "mismatch_index_histogram": {
+      "0": 8,
+      "1": 8,
+      "2": 24,
+      "3": 24,
+      "4": 24,
+      "5": 24,
+      "6": 32,
+      "7": 32,
+      "8": 32,
+      "9": 16,
+      "10": 8,
+      "11": 24,
+      "12": 0,
+      "13": 40,
+      "14": 8
+    }
+  },
+  "interpretation": "accepted units differ: DFlash uses raw tokens and DChord uses value decisions. The comparable algorithmic quantity is complete output tokens advanced per target verify round. Raw Torch adapter latency is diagnostic and is not production serving speed."
+}

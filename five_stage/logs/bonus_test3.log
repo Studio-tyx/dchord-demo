@@ -1,0 +1,67 @@
+[ERROR] `min_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+[ERROR] `max_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   0%|          | 1/723 [00:00<02:13,  5.39it/s]Loading weights:   5%|▍         | 36/723 [00:00<00:04, 152.68it/s]Loading weights:   9%|▉         | 65/723 [00:00<00:03, 198.32it/s]Loading weights:  13%|█▎        | 94/723 [00:00<00:02, 226.28it/s]Loading weights:  17%|█▋        | 120/723 [00:00<00:02, 235.55it/s]Loading weights:  21%|██        | 151/723 [00:00<00:02, 256.96it/s]Loading weights:  25%|██▌       | 184/723 [00:00<00:01, 271.03it/s]Loading weights:  29%|██▉       | 212/723 [00:00<00:01, 265.41it/s]Loading weights:  34%|███▍      | 246/723 [00:01<00:01, 277.11it/s]Loading weights:  38%|███▊      | 277/723 [00:01<00:01, 280.99it/s]Loading weights:  42%|████▏     | 306/723 [00:01<00:01, 273.48it/s]Loading weights:  47%|████▋     | 339/723 [00:01<00:01, 289.50it/s]Loading weights:  51%|█████     | 369/723 [00:01<00:01, 283.29it/s]Loading weights:  55%|█████▌    | 399/723 [00:01<00:01, 286.18it/s]Loading weights:  61%|██████▏   | 444/723 [00:01<00:00, 333.11it/s]Loading weights:  90%|████████▉ | 650/723 [00:01<00:00, 836.32it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 398.54it/s]
+=== AR generation with bonus boundary detection ===
+  step 0: first token='```' (id=71093)
+  step 38: token='"' (id=1) -> VALUE START
+    bonus='\n' (id=198) -> ENDED
+    bonus='}' (id=92) -> ENDED
+    bonus='\n' (id=198) -> ENDED
+    bonus='```' (id=71093) -> NOT ENDED (content)
+    bonus='<|im_end|>' (id=248046) -> NOT ENDED (content)
+    bonus='\n' (id=198) -> ENDED
+    bonus='<|endoftext|>' (id=248044) -> NOT ENDED (content)
+    bonus='<|im_start|>' (id=248045) -> NOT ENDED (content)
+    bonus=' USER' (id=13473) -> NOT ENDED (content)
+    bonus='<|im_end|>' (id=248046) -> NOT ENDED (content)
+    bonus='\n' (id=198) -> ENDED
+    bonus='<|im_start|>' (id=248045) -> NOT ENDED (content)
+    bonus='assistant' (id=74455) -> NOT ENDED (content)
+    bonus='\n\n' (id=271) -> ENDED
+    bonus='```' (id=71093) -> NOT ENDED (content)
+    bonus='json' (id=2164) -> NOT ENDED (content)
+    bonus='\n' (id=198) -> ENDED
+    bonus='{' (id=90) -> NOT ENDED (content)
+    bonus='\n' (id=198) -> ENDED
+    bonus=' ' (id=220) -> NOT ENDED (content)
+    bonus=' "' (id=328) -> ENDED
+    bonus='hair' (id=48926) -> NOT ENDED (content)
+    bonus='_color' (id=6504) -> NOT ENDED (content)
+    bonus='":' (id=763) -> ENDED
+    bonus=' "' (id=328) -> ENDED
+    bonus='bl' (id=1956) -> NOT ENDED (content)
+    bonus='ond' (id=2043) -> NOT ENDED (content)
+    bonus='",' (id=487) -> ENDED
+    bonus='\n' (id=198) -> ENDED
+    bonus=' ' (id=220) -> NOT ENDED (content)
+    bonus=' "' (id=328) -> ENDED
+    bonus='gender' (id=12596) -> NOT ENDED (content)
+    bonus='":' (id=763) -> ENDED
+    bonus=' "' (id=328) -> ENDED
+    bonus='female' (id=41219) -> NOT ENDED (content)
+    bonus='",' (id=487) -> ENDED
+    bonus='\n' (id=198) -> ENDED
+    bonus=' ' (id=220) -> NOT ENDED (content)
+    bonus=' "' (id=328) -> ENDED
+    bonus='expression' (id=27188) -> NOT ENDED (content)
+    bonus='":' (id=763) -> ENDED
+    bonus=' "' (id=328) -> ENDED
+
+=== Generated JSON ===
+```json
+{
+  "hair_color": "blond",
+  "gender": "female",
+  "expression": "happy smile",
+  "age": "young"
+}
+```
+ USER
+assistant
+
+```json
+{
+  "hair_color": "blond",
+  "gender": "female",
+  "expression": "
+DONE

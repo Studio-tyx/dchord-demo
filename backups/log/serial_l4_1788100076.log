@@ -1,0 +1,80 @@
+[ERROR] `min_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+[ERROR] `max_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+DAG: 40 attrs, 40 value positions
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights: 100%|██████████| 723/723 [00:00<00:00, 9144.25it/s]
+models loaded
+
+=== sample 0 [serial] ===
+  r0: draft=['5_o_Clock_=F', 'Arched_Eye=T', 'Attractive=T'] verify=['5_o_Clock_=F', 'Arched_Eye=T', 'Attractive=T'] -> accept all 3
+  r1: draft=['Bags_Under=F', 'Bald=F', 'Bangs=F'] verify=['Bags_Under=F', 'Bald=F', 'Bangs=F'] -> accept all 3
+  r2: draft=['Big_Lips=F', 'Big_Nose=F', 'Black_Hair=F'] verify=['Big_Lips=F', 'Big_Nose=F', 'Black_Hair=F'] -> accept all 3
+  r3: draft=['Blond_Hair=T', 'Blurry=F', 'Brown_Hair=F'] verify=['Blond_Hair=T', 'Blurry=F', 'Brown_Hair=F'] -> accept all 3
+  r4: draft=['Bushy_Eyeb=F', 'Chubby=F', 'Double_Chi=F'] verify=['Bushy_Eyeb=F', 'Chubby=F', 'Double_Chi=F'] -> accept all 3
+  r5: draft=['Eyeglasses=F', 'Goatee=F', 'Gray_Hair=F'] verify=['Eyeglasses=F', 'Goatee=F', 'Gray_Hair=F'] -> accept all 3
+  r6: draft=['Heavy_Make=F', 'High_Cheek=T', 'Male=F'] verify=['Heavy_Make=F', 'High_Cheek=T', 'Male=F'] -> accept all 3
+  r7: draft=['Mouth_Slig=F', 'Mustache=F', 'Narrow_Eye=F'] verify=['Mouth_Slig=F', 'Mustache=F', 'Narrow_Eye=F'] -> accept all 3
+  r8: draft=['No_Beard=T', 'Oval_Face=T', 'Pale_Skin=F'] verify=['No_Beard=T', 'Oval_Face=T', 'Pale_Skin=F'] -> accept all 3
+  r9: draft=['Pointy_Nos=F', 'Receding_H=F', 'Rosy_Cheek=T'] verify=['Pointy_Nos=F', 'Receding_H=F', 'Rosy_Cheek=F'] -> reject@2, re-draft from 30
+  r10: draft=['Sideburns=F', 'Smiling=T', 'Straight_H=F'] verify=['Sideburns=F', 'Smiling=T', 'Straight_H=F'] -> accept all 3
+  r11: draft=['Wavy_Hair=T', 'Wearing_Ea=T', 'Wearing_Ha=F'] verify=['Wavy_Hair=T', 'Wearing_Ea=T', 'Wearing_Ha=F'] -> accept all 3
+  r12: draft=['Wearing_Li=T', 'Wearing_Ne=F', 'Wearing_Ne=F'] verify=['Wearing_Li=T', 'Wearing_Ne=F', 'Wearing_Ne=F'] -> accept all 3
+  r13: draft=['Young=T'] verify=['Young=T'] -> accept all 1
+  rounds=14, verify_forwards=40, correct=32/40, verify_ms=8540.8
+
+=== sample 1 [serial] ===
+  r0: draft=['5_o_Clock_=F', 'Arched_Eye=T', 'Attractive=T'] verify=['5_o_Clock_=F', 'Arched_Eye=T', 'Attractive=T'] -> accept all 3
+  r1: draft=['Bags_Under=F', 'Bald=F', 'Bangs=F'] verify=['Bags_Under=F', 'Bald=F', 'Bangs=F'] -> accept all 3
+  r2: draft=['Big_Lips=F', 'Big_Nose=F', 'Black_Hair=F'] verify=['Big_Lips=F', 'Big_Nose=F', 'Black_Hair=F'] -> accept all 3
+  r3: draft=['Blond_Hair=F', 'Blurry=F', 'Brown_Hair=F'] verify=['Blond_Hair=F', 'Blurry=F', 'Brown_Hair=T'] -> reject@2, re-draft from 12
+  r4: draft=['Bushy_Eyeb=F', 'Chubby=F', 'Double_Chi=F'] verify=['Bushy_Eyeb=F', 'Chubby=F', 'Double_Chi=F'] -> accept all 3
+  r5: draft=['Eyeglasses=F', 'Goatee=F', 'Gray_Hair=F'] verify=['Eyeglasses=F', 'Goatee=F', 'Gray_Hair=F'] -> accept all 3
+  r6: draft=['Heavy_Make=F', 'High_Cheek=T', 'Male=F'] verify=['Heavy_Make=F', 'High_Cheek=T', 'Male=F'] -> accept all 3
+  r7: draft=['Mouth_Slig=T', 'Mustache=F', 'Narrow_Eye=F'] verify=['Mouth_Slig=T', 'Mustache=F', 'Narrow_Eye=F'] -> accept all 3
+  r8: draft=['No_Beard=T', 'Oval_Face=T', 'Pale_Skin=T'] verify=['No_Beard=T', 'Oval_Face=T', 'Pale_Skin=T'] -> accept all 3
+  r9: draft=['Pointy_Nos=F', 'Receding_H=F', 'Rosy_Cheek=T'] verify=['Pointy_Nos=F', 'Receding_H=F', 'Rosy_Cheek=T'] -> accept all 3
+  r10: draft=['Sideburns=F', 'Smiling=T', 'Straight_H=F'] verify=['Sideburns=F', 'Smiling=T', 'Straight_H=F'] -> accept all 3
+  r11: draft=['Wavy_Hair=T', 'Wearing_Ea=F', 'Wearing_Ha=F'] verify=['Wavy_Hair=T', 'Wearing_Ea=F', 'Wearing_Ha=F'] -> accept all 3
+  r12: draft=['Wearing_Li=F', 'Wearing_Ne=F', 'Wearing_Ne=F'] verify=['Wearing_Li=F', 'Wearing_Ne=F', 'Wearing_Ne=F'] -> accept all 3
+  r13: draft=['Young=T'] verify=['Young=T'] -> accept all 1
+  rounds=14, verify_forwards=40, correct=32/40, verify_ms=8572.7
+
+=== sample 2 [serial] ===
+  r0: draft=['5_o_Clock_=F', 'Arched_Eye=F', 'Attractive=T'] verify=['5_o_Clock_=F', 'Arched_Eye=F', 'Attractive=T'] -> accept all 3
+  r1: draft=['Bags_Under=F', 'Bald=F', 'Bangs=F'] verify=['Bags_Under=F', 'Bald=F', 'Bangs=F'] -> accept all 3
+  r2: draft=['Big_Lips=F', 'Big_Nose=F', 'Black_Hair=F'] verify=['Big_Lips=F', 'Big_Nose=F', 'Black_Hair=F'] -> accept all 3
+  r3: draft=['Blond_Hair=F', 'Blurry=F', 'Brown_Hair=T'] verify=['Blond_Hair=F', 'Blurry=F', 'Brown_Hair=T'] -> accept all 3
+  r4: draft=['Bushy_Eyeb=F', 'Chubby=F', 'Double_Chi=F'] verify=['Bushy_Eyeb=F', 'Chubby=F', 'Double_Chi=F'] -> accept all 3
+  r5: draft=['Eyeglasses=F', 'Goatee=F', 'Gray_Hair=F'] verify=['Eyeglasses=F', 'Goatee=F', 'Gray_Hair=F'] -> accept all 3
+  r6: draft=['Heavy_Make=F', 'High_Cheek=T', 'Male=T'] verify=['Heavy_Make=F', 'High_Cheek=T', 'Male=T'] -> accept all 3
+  r7: draft=['Mouth_Slig=T', 'Mustache=F', 'Narrow_Eye=F'] verify=['Mouth_Slig=T', 'Mustache=F', 'Narrow_Eye=F'] -> accept all 3
+  r8: draft=['No_Beard=T', 'Oval_Face=T', 'Pale_Skin=T'] verify=['No_Beard=T', 'Oval_Face=T', 'Pale_Skin=T'] -> accept all 3
+  r9: draft=['Pointy_Nos=F', 'Receding_H=F', 'Rosy_Cheek=F'] verify=['Pointy_Nos=F', 'Receding_H=F', 'Rosy_Cheek=F'] -> accept all 3
+  r10: draft=['Sideburns=F', 'Smiling=T', 'Straight_H=F'] verify=['Sideburns=F', 'Smiling=T', 'Straight_H=F'] -> accept all 3
+  r11: draft=['Wavy_Hair=T', 'Wearing_Ea=F', 'Wearing_Ha=F'] verify=['Wavy_Hair=T', 'Wearing_Ea=F', 'Wearing_Ha=F'] -> accept all 3
+  r12: draft=['Wearing_Li=F', 'Wearing_Ne=F', 'Wearing_Ne=F'] verify=['Wearing_Li=F', 'Wearing_Ne=F', 'Wearing_Ne=F'] -> accept all 3
+  r13: draft=['Young=T'] verify=['Young=T'] -> accept all 1
+  rounds=14, verify_forwards=40, correct=29/40, verify_ms=8524.8
+
+=== sample 3 [serial] ===
+  r0: draft=['5_o_Clock_=F', 'Arched_Eye=F', 'Attractive=T'] verify=['5_o_Clock_=F', 'Arched_Eye=F', 'Attractive=T'] -> accept all 3
+  r1: draft=['Bags_Under=F', 'Bald=F', 'Bangs=F'] verify=['Bags_Under=F', 'Bald=F', 'Bangs=F'] -> accept all 3
+  r2: draft=['Big_Lips=T', 'Big_Nose=F', 'Black_Hair=F'] verify=['Big_Lips=T', 'Big_Nose=F', 'Black_Hair=F'] -> accept all 3
+  r3: draft=['Blond_Hair=F', 'Blurry=F', 'Brown_Hair=T'] verify=['Blond_Hair=F', 'Blurry=F', 'Brown_Hair=T'] -> accept all 3
+  r4: draft=['Bushy_Eyeb=F', 'Chubby=F', 'Double_Chi=F'] verify=['Bushy_Eyeb=F', 'Chubby=F', 'Double_Chi=F'] -> accept all 3
+  r5: draft=['Eyeglasses=F', 'Goatee=F', 'Gray_Hair=F'] verify=['Eyeglasses=F', 'Goatee=F', 'Gray_Hair=F'] -> accept all 3
+  r6: draft=['Heavy_Make=T', 'High_Cheek=T', 'Male=F'] verify=['Heavy_Make=T', 'High_Cheek=T', 'Male=F'] -> accept all 3
+  r7: draft=['Mouth_Slig=F', 'Mustache=F', 'Narrow_Eye=F'] verify=['Mouth_Slig=F', 'Mustache=F', 'Narrow_Eye=F'] -> accept all 3
+  r8: draft=['No_Beard=T', 'Oval_Face=T', 'Pale_Skin=F'] verify=['No_Beard=T', 'Oval_Face=T', 'Pale_Skin=F'] -> accept all 3
+  r9: draft=['Pointy_Nos=F', 'Receding_H=F', 'Rosy_Cheek=F'] verify=['Pointy_Nos=F', 'Receding_H=F', 'Rosy_Cheek=F'] -> accept all 3
+  r10: draft=['Sideburns=F', 'Smiling=F', 'Straight_H=F'] verify=['Sideburns=F', 'Smiling=F', 'Straight_H=F'] -> accept all 3
+  r11: draft=['Wavy_Hair=T', 'Wearing_Ea=T', 'Wearing_Ha=F'] verify=['Wavy_Hair=T', 'Wearing_Ea=T', 'Wearing_Ha=F'] -> accept all 3
+  r12: draft=['Wearing_Li=T', 'Wearing_Ne=F', 'Wearing_Ne=F'] verify=['Wearing_Li=T', 'Wearing_Ne=F', 'Wearing_Ne=F'] -> accept all 3
+  r13: draft=['Young=T'] verify=['Young=T'] -> accept all 1
+  rounds=14, verify_forwards=40, correct=31/40, verify_ms=8930.3
+
+=== Summary [serial] (4 samples, wall=48.48s) ===
+  mean rounds: 14.00
+  mean verify_forwards: 40.00
+  mean correct: 31.00/40
+  total verify_ms: 34568.7
+DONE

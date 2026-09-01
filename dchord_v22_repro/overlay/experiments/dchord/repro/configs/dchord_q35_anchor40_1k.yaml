@@ -1,0 +1,83 @@
+model:
+  target_model_path: /root/autodl-tmp/models/Qwen3.5-4B
+  trust_remote_code: true
+  embedding_key: model.language_model.embed_tokens.weight
+  lm_head_key: model.language_model.embed_tokens.weight
+  norm_key: model.language_model.norm.weight
+  initial_draft_model_path: /root/autodl-tmp/models/Qwen3.5-4B-DFlash-torchspec-dchord
+  draft_model_config: /root/autodl-tmp/TorchSpec/experiments/dchord/repro/assets/dflash_qwen35_torchspec_config.json
+
+dataset:
+  train_data_path: /root/autodl-tmp/reports/dchord_torch_repro/training/data/train_1000.jsonl
+  eval_data_path: null
+  chat_template: qwen3-vl
+  prompt_key: conversations
+  min_loss_tokens: 6
+  last_turn_loss_only: true
+  shuffle_dataset: false
+
+training:
+  attention_backend: flex_attention
+  micro_batch_size: 1
+  draft_accumulation_steps: 4
+  learning_rate: 1.0e-5
+  min_lr: 1.0e-6
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+  max_seq_length: 1536
+  num_epochs: 1
+  seed: 20260824
+  training_num_gpus_per_node: 1
+  training_num_nodes: 1
+  fsdp_strategy: REPLICATE
+  fsdp_reduce_dtype: bfloat16
+  prefetch_depth: 2
+  save_interval: 0
+  save_per_epoch: true
+  max_checkpoints: 1
+  warmup_ratio: 0.05
+  dflash_block_size: 3
+  dflash_num_anchors: 14
+  dflash_num_target_layers: 8
+  dflash_loss_objective: dpace
+  dflash_dpace_alpha: 0.5
+  dchord_k: 3
+  dchord_num_anchors: 40
+  dchord_profiled_surface_path: /root/autodl-tmp/TorchSpec/experiments/dchord/repro/assets/profiled_surface_spec_v1.json
+  dchord_export_path: /root/autodl-tmp/reports/dchord_torch_repro/training/dchord_k3_anchor40_export
+
+inference:
+  inference_engine_type: vllm
+  store_last_hidden_states: false
+  inference_num_gpus: 1
+  inference_num_gpus_per_engine: 1
+  inference_num_gpus_per_node: 2
+  max_sample_pool_size: 32
+  inference_buffer_threshold: 16
+  inference_batch_size: 8
+  aux_hidden_states_layers: [1, 5, 9, 13, 17, 21, 25, 29]
+  vllm:
+    tp_size: 1
+    mem_fraction_static: 0.60
+    enable_multimodal: true
+    extra_args:
+      max_num_batched_tokens: 8192
+      limit_mm_per_prompt: {image: 1}
+
+mooncake:
+  master_server_address: null
+  metadata_server: null
+  protocol: tcp
+  global_segment_size: 8GB
+  local_buffer_size: 2GB
+  enable_hard_pin: true
+
+output_dir: /root/autodl-tmp/reports/dchord_torch_repro/training/dchord_k3_anchor40_run
+cache_dir: /root/autodl-tmp/cache/dchord_torch_repro_anchor40
+
+logging:
+  report_to: none
+
+debug:
+  enable_perf_metrics: true
+  save_debug_train_data: null

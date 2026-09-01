@@ -1,0 +1,111 @@
+diff --git a/torchspec/config/train_config.py b/torchspec/config/train_config.py
+--- a/torchspec/config/train_config.py
++++ b/torchspec/config/train_config.py
+@@ -160,6 +160,12 @@ class TrainingConfig:
+     dflash_num_anchors: int = 512
+     dflash_num_target_layers: int = 5
+ 
++    # DChord-specific parameters (DFlash-derived schema-value trainer)
++    dchord_k: int = 3
++    dchord_num_anchors: int = 40
++    dchord_profiled_surface_path: Optional[str] = None
++    dchord_export_path: Optional[str] = None
++
+     # DFlash2-specific parameters (used by DFlash2 trainer only)
+     dflash2_selector_loss_alpha: float = 1.0
+ 
+@@ -436,7 +442,12 @@ def config_to_flat_args(config: DictConfig) -> argparse.Namespace:
+     # multimodal sample's mask has to be recomputed after expansion.
+     flat["dynamic_loss_mask"] = (
+         flat.get("inference_engine_type") != "offline"
+-        and (flat["defer_tokenization"] or bool(flat.get("renderer")))
++        and (
++            flat["defer_tokenization"]
++            or bool(flat.get("renderer"))
++            or bool(flat.get("vllm_enable_multimodal"))
++            or bool(flat.get("sglang_enable_multimodal"))
++        )
+         and not flat["train_with_decode"]
+     )
+     flat["use_wandb"] = flat.get("use_wandb", False) or flat.get("report_to") == "wandb"
+diff --git a/torchspec/training/trainer_actor.py b/torchspec/training/trainer_actor.py
+--- a/torchspec/training/trainer_actor.py
++++ b/torchspec/training/trainer_actor.py
+@@ -40,5 +40,10 @@ def _trainer_class_for_config(draft_model_config):
+         return DSparkTrainer
+     if isinstance(draft_model_config, DFlashConfig):
++        if getattr(draft_model_config, "dchord_k", None):
++            from torchspec.training.dchord_trainer import DChordTrainer
++
++            return DChordTrainer
++
+         from torchspec.training.dflash_trainer import DFlashTrainer
+ 
+         return DFlashTrainer
+diff --git a/torchspec/data/template.py b/torchspec/data/template.py
+--- a/torchspec/data/template.py
++++ b/torchspec/data/template.py
+@@ -93,6 +93,17 @@ TEMPLATE_REGISTRY.register(
+ )
+ 
+ TEMPLATE_REGISTRY.register(
++    name="qwen3-vl",
++    template=ChatTemplate(
++        assistant_header="<|im_start|>assistant\n",
++        user_header="<|im_start|>user\n",
++        system_prompt="You are a helpful assistant.",
++        end_of_turn_token="<|im_end|>\n",
++        image_placeholder="<|vision_start|><|image_pad|><|vision_end|>",
++    ),
++)
++
++TEMPLATE_REGISTRY.register(
+     name="phi3",
+     template=ChatTemplate(
+         assistant_header="<|assistant|>\n",
+diff --git a/torchspec/training/dflash_trainer.py b/torchspec/training/dflash_trainer.py
+--- a/torchspec/training/dflash_trainer.py
++++ b/torchspec/training/dflash_trainer.py
+@@ -134,6 +134,14 @@ class DFlashTrainer(BaseTrainer):
+             draft_model = self._build_draft_model(config)
+ 
+         if dist.get_rank() == 0:
++            initial_draft_model_path = getattr(self.args, "initial_draft_model_path", None)
++            if initial_draft_model_path:
++                loaded_from = checkpoint.load_initial_draft_weights(
++                    draft_model, initial_draft_model_path
++                )
++                logger.info(f"[Rank 0] Loaded initial draft weights from {loaded_from}")
++
++            # The target embedding intentionally overrides the initial checkpoint.
+             draft_model.load_embedding(
+                 target_model_path,
+                 embedding_key=getattr(self.args, "embedding_key", "model.embed_tokens.weight"),
+diff --git a/torchspec/controller/loop.py b/torchspec/controller/loop.py
+--- a/torchspec/controller/loop.py
++++ b/torchspec/controller/loop.py
+@@ -496,6 +496,11 @@ def training_loop(
+         if max_ckpts > 0:
+             _cleanup_old_checkpoints(args.checkpoint_dir, max_ckpts)
+ 
++    dchord_export_path = getattr(args, "dchord_export_path", None)
++    if dchord_export_path:
++        logger.info("Exporting final DChord draft model to %s...", dchord_export_path)
++        train_group.save_draft_model_for_serving(dchord_export_path)
++
+     final_status = ray.get(controller.get_full_status.remote())
+     logger.info(
+         f"Training completed: {completed_steps} steps in {final_status['elapsed_seconds']:.1f}s | "
+diff --git a/torchspec/inference/engine/vllm_engine.py b/torchspec/inference/engine/vllm_engine.py
+--- a/torchspec/inference/engine/vllm_engine.py
++++ b/torchspec/inference/engine/vllm_engine.py
+@@ -340,7 +340,8 @@ class VllmEngine(InferenceEngine):
+ 
+         max_seq_length = getattr(self.args, "max_seq_length", None)
+         if max_seq_length:
+-            engine_kwargs["max_model_len"] = max_seq_length
++            # Hidden-state capture emits one token at the configured boundary.
++            engine_kwargs["max_model_len"] = max_seq_length + 1
+ 
+         if dist_init_addr:
+             host, port_str = dist_init_addr.rsplit(":", 1)

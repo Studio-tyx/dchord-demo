@@ -1,0 +1,5 @@
+dchord-v2.2-torch-repro-code-v2
+base-torchspec=43dec00d39a919309fb9b531b3fab66bdadbc397
+scope=self-distillation,online-training,torch-inference,acceptance-evaluation
+checkpoint-included=false
+custom-serving-patch-included=false

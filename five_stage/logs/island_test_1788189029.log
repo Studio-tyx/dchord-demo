@@ -1,0 +1,61 @@
+===== DFS =====
+[ERROR] `min_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+[ERROR] `max_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+DAG: 40 attrs, 40 value positions, strategy=dfs
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights: 100%|██████████| 723/723 [00:00<00:00, 8977.76it/s]
+models loaded
+
+=== sample 0 [parallel/dfs] ===
+Traceback (most recent call last):
+  File "/root/autodl-tmp/0829/five_stage/dchord_5stage.py", line 718, in <module>
+    main()
+  File "/root/autodl-tmp/0829/five_stage/dchord_5stage.py", line 698, in main
+    completion, branches, rounds, n_vf, vms = dchord_parallel(
+                                              ^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/0829/five_stage/dchord_5stage.py", line 586, in dchord_parallel
+    proposals_list, draft_ms = draft_choices_grouped(
+                               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/0829/five_stage/dchord_5stage.py", line 354, in draft_choices_grouped
+    choices.append(branch(logits[0, offset], pairs[selected_fields[offset]], device))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/0829/five_stage/dchord_5stage.py", line 50, in branch
+    return pair[int(pair_tensor[int(scores.argmax())])]
+           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IndexError: list index out of range
+===== BFS =====
+[ERROR] `min_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+[ERROR] `max_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+DAG: 40 attrs, 40 value positions, strategy=bfs
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights: 100%|██████████| 723/723 [00:00<00:00, 8284.25it/s]
+models loaded
+
+=== sample 0 [parallel/bfs] ===
+Traceback (most recent call last):
+  File "/root/autodl-tmp/0829/five_stage/dchord_5stage.py", line 718, in <module>
+    main()
+  File "/root/autodl-tmp/0829/five_stage/dchord_5stage.py", line 698, in main
+    completion, branches, rounds, n_vf, vms = dchord_parallel(
+                                              ^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/0829/five_stage/dchord_5stage.py", line 586, in dchord_parallel
+    proposals_list, draft_ms = draft_choices_grouped(
+                               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/0829/five_stage/dchord_5stage.py", line 354, in draft_choices_grouped
+    choices.append(branch(logits[0, offset], pairs[selected_fields[offset]], device))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/0829/five_stage/dchord_5stage.py", line 50, in branch
+    return pair[int(pair_tensor[int(scores.argmax())])]
+           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IndexError: list index out of range
+ALL_DONE

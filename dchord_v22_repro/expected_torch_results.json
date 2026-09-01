@@ -1,0 +1,23 @@
+{
+  "scope": "Torch cached algorithmic acceptance on the frozen 128 CelebA samples",
+  "training_reference": {
+    "teacher_records": 1000,
+    "teacher_decisions": 40000,
+    "optimizer_steps": 250,
+    "dchord_k": 3,
+    "dchord_num_anchors": 40,
+    "draft_accumulation_steps": 4,
+    "epochs": 1
+  },
+  "timing_claim": "diagnostic only; do not report as production serving speed",
+  "dflash_b16": {
+    "mean_accepted_raw_tokens_per_round": 7.084,
+    "mean_complete_output_tokens_advanced_per_round": 8.060
+  },
+  "dchord_k3": {
+    "mean_accepted_value_decisions_per_round": 2.394,
+    "mean_complete_output_tokens_advanced_per_round": 27.979
+  },
+  "dchord_over_dflash_complete_output_advance_ratio": 3.472,
+  "tolerance_note": "Small BF16 differences are possible; require 128/128 valid 40-boolean schemas and inspect any value mismatch separately."
+}

@@ -1,0 +1,37 @@
+diff --git a/torchspec/models/draft/dflash.py b/torchspec/models/draft/dflash.py
+--- a/torchspec/models/draft/dflash.py
++++ b/torchspec/models/draft/dflash.py
+@@ -237,7 +237,13 @@ class DFlashAttention(nn.Module):
+ 
+         # RoPE with concatenated position IDs (context + draft)
+         full_position_ids = torch.cat([context_position_ids, draft_position_ids], dim=1)
+-        cos, sin = self.rotary_emb(q, seq_len=total_len)
++        # DChord queries are sparse absolute schema-value positions. K value
++        # queries can skip over compiler-injected fixed-structure tokens, so
++        # the largest position can exceed the number of materialized vectors.
++        rope_seq_len = max(
++            total_len, int(full_position_ids.max().item()) + 1
++        )
++        cos, sin = self.rotary_emb(q, seq_len=rope_seq_len)
+         cos = cos.to(q.device)
+         sin = sin.to(q.device)
+ 
+@@ -251,7 +257,17 @@ class DFlashAttention(nn.Module):
+         sin_k = sin.squeeze(1).squeeze(0)[full_position_ids].unsqueeze(1)
+         k = (k * cos_k) + (_rotate_half(k) * sin_k)
+ 
+-        if block_mask is not None:
++        if torch.is_tensor(block_mask):
++            # Structured K3 blocks use a small dense boolean mask. SDPA is
++            # exact for this mask and avoids unsupported FlexAttention decode
++            # shapes on consumer GPUs.
++            k = _repeat_kv(k, self.num_kv_groups)
++            v = _repeat_kv(v, self.num_kv_groups)
++            attn_output = F.scaled_dot_product_attention(
++                q, k, v, attn_mask=block_mask,
++                is_causal=False, dropout_p=0.0,
++            )
++        elif block_mask is not None:
+             from torchspec.models.ops.flex_attention import compile_friendly_flex_attention
+ 
+             # Use enable_gqa=True to let FlexAttention handle GQA internally

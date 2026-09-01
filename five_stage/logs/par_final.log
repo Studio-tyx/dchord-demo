@@ -1,0 +1,29 @@
+[ERROR] `min_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+[ERROR] `max_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /root/autodl-tmp/conda/envs/torchspec/lib/python3.12/site-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+DAG: 40 attrs, 40 value positions
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights: 100%|██████████| 723/723 [00:00<00:00, 7751.64it/s]
+models loaded
+
+=== sample 0 [parallel] ===
+  r0: accept 3, reject 0 (corrected) remaining=37
+  r1: accept 3, reject 0 (corrected) remaining=34
+  r2: accept 3, reject 0 (corrected) remaining=31
+  r3: accept 2, reject 1 (corrected) remaining=28
+  r4: accept 3, reject 0 (corrected) remaining=25
+  r5: accept 3, reject 0 (corrected) remaining=22
+  rounds=14, verify_forwards=40, correct=33/40
+
+=== sample 1 [parallel] ===
+  r0: accept 3, reject 0 (corrected) remaining=37
+  r1: accept 3, reject 0 (corrected) remaining=34
+  r2: accept 3, reject 0 (corrected) remaining=31
+  r3: accept 2, reject 1 (corrected) remaining=28
+  r4: accept 3, reject 0 (corrected) remaining=25
+  r5: accept 3, reject 0 (corrected) remaining=22
+  rounds=14, verify_forwards=40, correct=33/40
+
+=== Summary [parallel] (2 samples) ===
+  mean rounds: 14.00
+  mean verify_forwards: 40.00
+  mean correct: 33.00/40
+DONE
